@@ -11,15 +11,15 @@ app.listen(port);
 var me = {
 	name: "chris",
 	location: "Provo, UT & Oak Creek, WI",
-	hobbies: ["computers", "sports", "video games", "outdoors"];
-	occupations: ["sandwich artist", "security guard", "pizza driver"];
-	occupationsLatest: "System Admin";
+	hobbies: ["sports", "video games", "outdoors", "computers"],
+	occupations: ["sandwich artist", "security guard", "pizza driver", "system admin"]
+	
 };
 
 app.use(function (req, res, next) {
-	res.setHeader('Access-Control-Allow-Origin', '*');
-	res.setHeader('Access-Control-Allow-Methods, OPTIONS, GET, POST');
-	res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+	res.header('Access-Control-Allow-Origin', '*');
+	res.header('Access-Control-Allow-Methods, OPTIONS, GET, POST');
+	res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
 	next();
 });
 
@@ -32,17 +32,45 @@ app.get('/location', function (req, res) {
 });
 
 app.get('/hobbies', function (req, res) {
-	for (var i = 0; i < me.hobbies.length; i++) {
-		res.send(me.hobbies[i]);
-	};
+
+	
+		var sorted = me.hobbies.sort();
+		
+		if (req.query.hobbies === 'alpha') {
+			res.send(sorted)
+		}
+		else if (req.query.hobbies === 'alpha.rever'){
+		  		var reverse = sorted.reverse();
+		  		res.send(reverse);
+		}
+			 
+		else if (req.query.hobbies === ''){ 
+			res.send(me.hobbies);
+		}
+	
 });
 
 app.get('/occupations', function (req, res) {
-	for (var i = 0; i < me.occupations.length; i++) {
-		res.send(me.occupations[i]);
-	};
+	
+		
+		var occSorted = me.occupations.sort();
+		if (req.query.occupations === 'alpha') {
+			res.send(occSorted)
+		}
+		else if (req.query.occupations === 'alpha.rever'){
+		  		var reve = occSorted.reverse();
+		  		res.send(reve);
+		
+		}	 
+		else if (req.query.occupations === ''){ 
+			res.send(me.occupations);
+		}
+	
+	
 });
 
 app.get('/occupations/latest', function (req, res) {
-	res.send(me.occupationsLatest);
+	res.send(me.occupations[me.occupations.length - 1]);
 });
+
+
