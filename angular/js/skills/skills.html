@@ -1,0 +1,31 @@
+<div ng-controller="skillsCtrl">
+
+	My former occupations include:
+	<br>
+	<div ng-repeat="occupation in occupations">
+		<ul>
+			<li>{{occupation}}</li>
+		</ul>
+
+	</div>
+	I'm mentioned in:
+	<div ng-repeat="mention in mentions">
+		<ul>
+			<li>{{mention}}</li>
+		</ul>
+	</div>
+	Here's my references:
+	<div ng-repeat="reference in references">
+		<ul>
+			<li>{{reference}}</li>
+		</ul>
+	</div>
+	Here's the skills that I possess:
+	<div ng-repeat="skill in skills">
+		<ul>
+			<li>{{skill}}</li>
+		</ul>
+	</div>
+
+
+</div>
